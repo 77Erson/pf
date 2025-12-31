@@ -123,4 +123,4 @@ MIT License - Feel free to use this template for your own portfolio!
 
 ---
 
-Built with ❤️ by Diwash Ghimire
+By Diwash Ghimire

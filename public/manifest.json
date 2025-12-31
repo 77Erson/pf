@@ -1,0 +1,48 @@
+{
+  "name": "Erson Editz | Professional Video Editor",
+  "short_name": "Erson Editz",
+  "description": "Get high-quality video edits for YouTube, social media, and businesses. Professional editing with a creative touch.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#F97316",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["entertainment", "portfolio", "video editing"],
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "View Portfolio",
+      "short_name": "Work",
+      "description": "See my latest video editing projects",
+      "url": "/#work"
+    },
+    {
+      "name": "Contact Me",
+      "short_name": "Contact",
+      "description": "Get in touch for collaborations",
+      "url": "/#contact"
+    }
+  ],
+  "prefer_related_applications": false
+}
