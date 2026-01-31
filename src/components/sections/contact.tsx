@@ -7,31 +7,40 @@ import {
   Phone,
   MapPin,
   Send,
-  Instagram,
-  Youtube,
-  Linkedin,
   CheckCircle,
   Loader2,
   AlertCircle,
 } from "lucide-react";
-import { siteConfig, FiverrIcon } from "@/data/site-config";
+import Image from "next/image";
+import { siteConfig } from "@/data/site-config";
 import { cn } from "@/lib/utils";
 
-const socialLinks = [
+interface SocialLink {
+  name: string;
+  url: string;
+  icon: string;
+}
+
+const socialLinks: SocialLink[] = [
   {
     name: "Instagram",
     url: "https://www.instagram.com/erson.editz/",
-    icon: Instagram,
+    icon: "/icons/instagram.svg",
   },
   {
     name: "YouTube",
     url: "https://www.youtube.com/@ersoneditz",
-    icon: Youtube,
+    icon: "/icons/youtube.svg",
   },
   {
     name: "LinkedIn",
     url: "https://www.linkedin.com/in/ersoneditz/",
-    icon: Linkedin,
+    icon: "/icons/linkedin.svg",
+  },
+  {
+    name: "Fiverr",
+    url: "https://www.fiverr.com/s/BRk6mpW",
+    icon: "/icons/fiverr.svg",
   },
 ];
 
@@ -201,21 +210,15 @@ export function Contact() {
                     whileTap={{ scale: 0.95 }}
                     aria-label={social.name}
                   >
-                    <social.icon className="w-5 h-5" />
+                    <Image
+                      src={social.icon}
+                      alt={social.name}
+                      width={20}
+                      height={20}
+                      className="w-5 h-5 dark:invert"
+                    />
                   </motion.a>
                 ))}
-                {/* Fiverr */}
-                <motion.a
-                  href="https://www.fiverr.com/s/BRk6mpW"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 rounded-xl bg-card border border-border hover:border-accent/50 hover:bg-accent/10 transition-all duration-300"
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  aria-label="Fiverr"
-                >
-                  <FiverrIcon />
-                </motion.a>
               </div>
             </motion.div>
 
