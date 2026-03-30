@@ -10,8 +10,9 @@ const categories = [
   { key: "all", label: "All Projects" },
   { key: "commercial", label: "Commercial" },
   { key: "youtube", label: "YouTube" },
-  { key: "social", label: "Social Media" },
-  { key: "music", label: "Music Videos" },
+  { key: "vlog", label: "Vlog" },
+  { key: "podcast", label: "Podcast" },
+  { key: "documentary", label: "Documentary" },
 ];
 
 export function Work() {
