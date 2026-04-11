@@ -87,7 +87,7 @@ export function About() {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.5 }}
                 exit={{ opacity: 0, y: 20 }}
-                className="absolute -bottom-9 -right-1 bg-card p-3 rounded-xl shadow-soft-lg border border-border"
+                className="absolute -bottom-7 -right-1 bg-card p-3 rounded-xl shadow-soft-lg border border-border"
               >
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
