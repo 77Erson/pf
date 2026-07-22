@@ -38,7 +38,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://erson.studio"),
   title: {
-    default: "Erson | Professional Video Editor & Brand Content Strategist",
+    default: "Erson | Brand Content Strategist & Professional Video Editor",
     template: "%s | Erson",
   },
   description:
@@ -82,7 +82,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://erson.studio",
     siteName: "Erson Studio",
-    title: "Erson | Professional Video Editing Services",
+    title: "Erson | Brand Content Strategist & Professional Video Editor",
     description:
       "I help businesses turn raw footage into content that drives watch time, conversions, and brand recall. Available for retainer partnerships worldwide.",
     images: [
@@ -90,14 +90,14 @@ export const metadata: Metadata = {
         url: "/images/Resolve.jpg",
         width: 1200,
         height: 630,
-        alt: "Erson - Professional Video Editor",
+        alt: "Erson - Brand Content Strategist",
         type: "image/jpeg",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Erson — Professional Video Editor",
+    title: "Erson — Brand Content Strategist",
     description:
       "I help businesses turn raw footage into content that drives watch time, conversions, and brand recall. 3+ years of experience.",
     images: ["/images/Resolve.jpg"],

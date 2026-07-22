@@ -28,7 +28,7 @@ export interface SiteConfig {
 export const siteConfig: SiteConfig = {
   name: "Erson",
   alias: "Erson",
-  title: "Professional Video Editor & Brand Content Strategist",
+  title: "Brand Content Strategist & Video Editor",
   description:
     "Helping businesses turn raw footage into content that drives watch time, conversions, and brand recall.",
   url: "https://erson.studio",
