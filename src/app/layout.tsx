@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter, Space_Grotesk, Fraunces } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { GoogleAnalytics, GoogleTagManager, GTMNoScript } from "@/components/analytics/google-analytics";
 import { FacebookPixel, MicrosoftClarity } from "@/components/analytics/tracking-pixels";
@@ -18,6 +18,12 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+
 // Viewport configuration
 export const viewport: Viewport = {
   width: "device-width",
@@ -30,13 +36,13 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://diwash-ghimire.com.np"),
+  metadataBase: new URL("https://erson.studio"),
   title: {
-    default: "Erson Editz | Professional Video Editor & Creative Professional",
-    template: "%s | Erson Editz",
+    default: "Erson | Professional Video Editor & Brand Content Strategist",
+    template: "%s | Erson",
   },
   description:
-    "Get high-quality video edits for YouTube, social media, and businesses. Professional editing with a creative touch to grow your audience and enhance visual storytelling.",
+    "I help businesses turn raw footage into content that drives watch time, conversions, and brand recall. 3+ years of professional video editing with a mainstream media background.",
   keywords: [
     "video editor",
     "video editing portfolio",
@@ -51,7 +57,7 @@ export const metadata: Metadata = {
     "video editing services",
     "Diwash Ghimire",
     "Erson",
-    "Erson Editz",
+    "erson.studio",
     "freelance editor",
     "Adobe Premiere Pro",
     "DaVinci Resolve",
@@ -60,9 +66,9 @@ export const metadata: Metadata = {
     "Nepal video editor",
     "hire video editor",
   ],
-  authors: [{ name: "Erson Editz", url: "https://diwash-ghimire.com.np" }],
-  creator: "Erson Editz",
-  publisher: "Erson Editz",
+  authors: [{ name: "Erson", url: "https://erson.studio" }],
+  creator: "Erson",
+  publisher: "Erson",
   formatDetection: {
     email: false,
     address: false,
@@ -74,26 +80,26 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://diwash-ghimire.com.np",
-    siteName: "Erson Editz Portfolio",
-    title: "Professional Video Editing Services",
+    url: "https://erson.studio",
+    siteName: "Erson Studio",
+    title: "Erson | Professional Video Editing Services",
     description:
-      "Get high-quality video edits for YouTube and social media. Helping brands and creators grow through compelling storytelling.",
+      "I help businesses turn raw footage into content that drives watch time, conversions, and brand recall. Available for retainer partnerships worldwide.",
     images: [
       {
         url: "/images/Resolve.jpg",
         width: 1200,
         height: 630,
-        alt: "Erson Editz - Professional Video Editor",
+        alt: "Erson - Professional Video Editor",
         type: "image/jpeg",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Professional Video Editor Portfolio",
+    title: "Erson — Professional Video Editor",
     description:
-      "Check out my portfolio featuring high-quality video edits designed for social media and YouTube growth.",
+      "I help businesses turn raw footage into content that drives watch time, conversions, and brand recall. 3+ years of experience.",
     images: ["/images/Resolve.jpg"],
     creator: "@ersoneditz",
   },
@@ -111,7 +117,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://diwash-ghimire.com.np",
+    canonical: "https://erson.studio",
   },
   verification: {
     google: "7-gSlNhswYG3pHYbG_SG0svt1I10snAK86pF6K-8Zyw",
@@ -119,7 +125,7 @@ export const metadata: Metadata = {
   other: {
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "black-translucent",
-    "apple-mobile-web-app-title": "Erson Editz",
+    "apple-mobile-web-app-title": "Erson",
   },
 };
 
@@ -141,21 +147,21 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
-        
+
         {/* Favicon and App Icons */}
         <link rel="icon" href="/favicon.png" type="image/png" />
         <link rel="icon" href="/favicon.png" sizes="32x32" type="image/png" />
         <link rel="icon" href="/favicon.png" sizes="16x16" type="image/png" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
         <link rel="manifest" href="/manifest.json" />
-        
+
         {/* DNS Prefetch for external resources */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://connect.facebook.net" />
-        
+
         {/* Structured Data for SEO */}
         <StructuredData />
-        
+
         {/* Analytics Scripts */}
         {gaId && <GoogleAnalytics measurementId={gaId} />}
         {gtmId && <GoogleTagManager containerId={gtmId} />}
@@ -163,11 +169,11 @@ export default function RootLayout({
         {clarityId && <MicrosoftClarity projectId={clarityId} />}
       </head>
       <body
-        className={`${inter.variable} ${spaceGrotesk.variable} font-sans`}
+        className={`${inter.variable} ${spaceGrotesk.variable} ${fraunces.variable} font-sans`}
       >
         {/* GTM NoScript fallback */}
         {gtmId && <GTMNoScript containerId={gtmId} />}
-        
+
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

@@ -73,11 +73,11 @@ export function generatePersonSchema(): PersonSchema {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Diwash Ghimire",
-    alternateName: "Erson Editz",
-    url: "https://diwash-ghimire.com.np",
-    image: "https://diwash-ghimire.com.np/images/Resolve.jpg",
+    alternateName: "Erson",
+    url: "https://erson.studio",
+    image: "https://erson.studio/images/Resolve.jpg",
     description:
-      "Get high-quality video edits for YouTube, social media, and businesses. Professional editing with a creative touch to grow your audience and enhance visual storytelling.",
+      "I help businesses turn raw footage into content that drives watch time, conversions, and brand recall. 3+ years of professional video editing with a mainstream media background.",
     jobTitle: "Professional Video Editor",
     email: "erson.editz@gmail.com",
     telephone: "+977-9825968458",
@@ -109,18 +109,18 @@ export function generateWebsiteSchema(): WebsiteSchema {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Erson Editz Portfolio",
-    alternateName: "Diwash Ghimire - Video Editor",
-    url: "https://diwash-ghimire.com.np",
+    name: "Erson Studio",
+    alternateName: "Erson",
+    url: "https://erson.studio",
     description:
-      "Get high-quality video edits for YouTube, social media, and businesses. Professional editing with a creative touch to grow your audience and enhance visual storytelling.",
+      "I help businesses turn raw footage into content that drives watch time, conversions, and brand recall. 3+ years of professional video editing with a mainstream media background.",
     author: {
       "@type": "Person",
       name: "Diwash Ghimire",
       alternateName: "Erson",
-      url: "https://diwash-ghimire.com.np",
-      image: "https://diwash-ghimire.com.np/og-image.jpg",
-      description: "Professional Video Editor & Creative Professional",
+      url: "https://erson.studio",
+      image: "https://erson.studio/og-image.jpg",
+      description: "Professional Video Editor & Content Strategist",
       jobTitle: "Video Editor",
       email: "erson.editz@gmail.com",
       telephone: "+977-9825968458",
@@ -141,7 +141,7 @@ export function generateWebsiteSchema(): WebsiteSchema {
     },
     potentialAction: {
       "@type": "SearchAction",
-      target: "https://diwash-ghimire.com.np/?s={search_term_string}",
+      target: "https://erson.studio/?s={search_term_string}",
       "query-input": "required name=search_term_string",
     },
   };
@@ -156,7 +156,7 @@ export function generateServiceSchema(): ServiceSchema {
     provider: {
       "@type": "Person",
       name: "Diwash Ghimire",
-      url: "https://diwash-ghimire.com.np",
+      url: "https://erson.studio",
     },
     areaServed: "Worldwide",
     description:

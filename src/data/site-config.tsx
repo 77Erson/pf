@@ -26,15 +26,15 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  name: "Diwash Ghimire",
+  name: "Erson",
   alias: "Erson",
-  title: "Video Editor & Creative Professional",
+  title: "Professional Video Editor & Brand Content Strategist",
   description:
-    "Transforming ideas into compelling visual stories that captivate and inspire audiences.",
-  url: "https://diwash-ghimire.com.np",
+    "Helping businesses turn raw footage into content that drives watch time, conversions, and brand recall.",
+  url: "https://erson.studio",
   email: "erson.editz@gmail.com",
   phone: "+977 9825968458",
-  location: "All Over The World",
+  location: "Based in Nepal, flexible with clients worldwide",
   social: [
     {
       name: "Instagram",
@@ -53,11 +53,11 @@ export const siteConfig: SiteConfig = {
     },
   ],
   navLinks: [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Work", href: "#work" },
-    { name: "Skills", href: "#skills" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "/#home" },
+    { name: "About", href: "/#about" },
+    { name: "Case study", href: "/#blogs" },
+    { name: "Work", href: "/#work" },
+    { name: "Contact", href: "/#contact" },
   ],
 };
 

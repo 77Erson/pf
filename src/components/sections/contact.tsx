@@ -233,18 +233,17 @@ export function Contact() {
                 Prefer Quick Hiring?
               </h3>
               <p className="text-sm text-muted-foreground mb-4">
-                Check out my Fiverr profile for quick project quotes and instant
-                booking.
+                Contact me on Whatsapp for quick project quotes and instant booking.
               </p>
               <motion.a
-                href="https://www.fiverr.com/s/BRk6mpW"
+                href="https://wa.me/9779825968458?text=Hi, Erson I'd like to discuss a project."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-accent text-sm"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                View on Fiverr
+                Whatsapp Contact
               </motion.a>
             </motion.div>
           </motion.div>

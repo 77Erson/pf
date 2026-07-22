@@ -55,7 +55,7 @@ export function Footer() {
               <span className="text-accent">E</span>RSON
             </a>
             <p className="text-sm text-muted-foreground flex items-center gap-1">
-              © {currentYear} {siteConfig.alias}.  All rights
+              © {currentYear} {siteConfig.alias}. All rights
               reserved.
             </p>
           </motion.div>

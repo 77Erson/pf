@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/_next/"],
       },
     ],
-    sitemap: "https://diwash-ghimire.com.np/sitemap.xml",
-    host: "https://diwash-ghimire.com.np",
+    sitemap: "https://erson.studio/sitemap.xml",
+    host: "https://erson.studio",
   };
 }

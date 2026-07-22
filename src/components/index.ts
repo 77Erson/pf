@@ -7,6 +7,7 @@ export { Hero } from "./sections/hero";
 export { About } from "./sections/about";
 export { Skills } from "./sections/skills";
 export { Work } from "./sections/work";
+export { Organizations } from "./sections/organizations";
 export { Testimonials } from "./sections/testimonials";
 export { Contact } from "./sections/contact";
 

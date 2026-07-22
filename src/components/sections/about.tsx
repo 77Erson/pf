@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { Check, ArrowRight } from "lucide-react";
+import { Check, ArrowRight, Star } from "lucide-react";
 import { aboutData } from "@/data/about";
 import { cn } from "@/lib/utils";
 
@@ -117,21 +117,108 @@ export function About() {
               {aboutData.passion}
             </p>
 
-            {/* Highlights */}
-            <div className="grid grid-cols-2 gap-3 pt-4">
-              {aboutData.highlights.map((item, index) => (
-                <motion.div
-                  key={item}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
-                  className="flex items-center gap-2"
+            {/* Rating Breakdown Card (Replaces Highlights) */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="p-5 sm:p-6 rounded-2xl bg-card border border-border/80 shadow-soft-lg space-y-4 text-xs"
+            >
+              {/* Profile Header */}
+              <div className="flex items-center justify-between border-b border-border/60 pb-3">
+                <div className="flex items-center gap-3">
+                  <div className="relative w-10 h-10 rounded-full bg-accent/10 border border-accent/30 flex items-center justify-center font-bold text-accent text-sm overflow-hidden">
+                    <span>E</span>
+                    
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold text-sm">Erson</span>
+                      <div className="flex items-center gap-1 text-xs font-bold text-amber-500 bg-amber-500/10 px-2 py-0.5 rounded-md">
+                        <Star className="w-3 h-3 fill-amber-500 text-amber-500" />
+                        <span>4.9</span>
+                        <span className="text-muted-foreground font-normal">(48)</span>
+                      </div>
+                    </div>
+                    <p className="text-[11px] text-muted-foreground flex items-center gap-1.5 mt-0.5">
+                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                      <span>Online</span>
+                      <span>•</span>
+                      <span>Avg response time: 3 hours</span>
+                    </p>
+                  </div>
+                </div>
+                <a
+                  href="https://www.fiverr.com/s/BRk6mpW"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hidden sm:inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg bg-secondary hover:bg-accent/10 hover:text-accent border border-border transition-colors"
                 >
-                  <Check className="w-4 h-4 text-accent flex-shrink-0" />
-                  <span className="text-sm">{item}</span>
-                </motion.div>
-              ))}
-            </div>
+                  <span>Get Info</span>
+                </a>
+              </div>
+
+              {/* Breakdown Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Left Column: Star Rating Distribution */}
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between font-medium mb-2 text-muted-foreground">
+                    <span className="font-semibold text-foreground text-xs">48 Reviews</span>
+                    <div className="flex items-center gap-0.5 text-amber-500 font-bold">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star key={i} className="w-3 h-3 fill-amber-500 text-amber-500" />
+                      ))}
+                      <span className="ml-1 text-foreground">4.9</span>
+                    </div>
+                  </div>
+
+                  {[
+                    { stars: "5 Stars", count: 45, percentage: 94 },
+                    { stars: "4 Stars", count: 3, percentage: 6 },
+                    { stars: "3 Stars", count: 0, percentage: 0 },
+                    { stars: "2 Stars", count: 0, percentage: 0 },
+                    { stars: "1 Star", count: 0, percentage: 0 },
+                  ].map((item) => (
+                    <div key={item.stars} className="flex items-center gap-2 text-[11px]">
+                      <span className="w-12 text-muted-foreground shrink-0">{item.stars}</span>
+                      <div className="flex-1 h-2 rounded-full bg-secondary overflow-hidden">
+                        <div
+                          className="h-full bg-foreground/80 dark:bg-foreground/90 rounded-full transition-all duration-500"
+                          style={{ width: `${item.percentage}%` }}
+                        />
+                      </div>
+                      <span className="w-6 text-right text-muted-foreground shrink-0">({item.count})</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Right Column: Rating Breakdown Metrics */}
+                <div className="space-y-2.5 sm:border-l sm:border-border/60 sm:pl-4 pt-2 sm:pt-0">
+                  <p className="font-semibold text-foreground mb-1 text-xs">Rating Breakdown</p>
+
+                  <div className="flex items-center justify-between text-[11px]">
+                    <span className="text-muted-foreground">Seller communication level</span>
+                    <span className="font-semibold text-foreground flex items-center gap-1">
+                      <Star className="w-3 h-3 fill-amber-500 text-amber-500" /> 5
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between text-[11px]">
+                    <span className="text-muted-foreground">Quality of delivery</span>
+                    <span className="font-semibold text-foreground flex items-center gap-1">
+                      <Star className="w-3 h-3 fill-amber-500 text-amber-500" /> 4.9
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between text-[11px]">
+                    <span className="text-muted-foreground">Value of delivery</span>
+                    <span className="font-semibold text-foreground flex items-center gap-1">
+                      <Star className="w-3 h-3 fill-amber-500 text-amber-500" /> 4.9
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
 
             {/* CTA */}
             <motion.a

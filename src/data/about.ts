@@ -1,19 +1,19 @@
 export const aboutData = {
-  intro: `Hi, my name is Diwash Ghimire, AKA Erson. I am 21 years old with over 3 years of experience as a professional video editor. I work full-time as a freelance video editor, specializing in crafting engaging, high-quality content for various platforms.`,
-  
-  expertise: `With expertise in Adobe Premiere Pro and DaVinci Resolve, I excel in post-production techniques, including color grading, motion graphics, audio synchronization, and dynamic transitions. I have a strong eye for detail, ensuring that every project I touch meets the highest creative standards.`,
-  
-  passion: `I'm also proficient in storytelling, sound design, and 3D compositing. Outside of editing, I continuously explore new visual trends and technologies to keep my work fresh and impactful.`,
-  
+  intro: `I'm Erson, a brand-driven content strategist with 3 years of experience helping founders and teams turn raw footage into video content with one consistent voice, tone, and visual identity.`,
+
+  expertise: `With expertise in Content strategy, Brand building, and Video editing, I've helped brands grow from 8k views per month to 10+ million monthly views, with consistent storytelling and brand-first content, not just individual video edits. I focus on making sure every piece you publish reinforces the same brand, so your audience recognizes you instantly.`,
+
+  passion: `Backed by a 4.9-star rating across 48 client reviews on a leading freelance platform, with 94% rated five stars.`,
+
   cta: `Let's create something amazing together!`,
-  
+
   stats: [
     { value: "3+", label: "Years Experience" },
     { value: "100+", label: "Projects Completed" },
     { value: "50+", label: "Happy Clients" },
-    { value: "24/7", label: "Availability" },
+    { value: "4.9/5", label: "Average Rating" },
   ],
-  
+
   highlights: [
     "Adobe Premiere Pro Expert",
     "DaVinci Resolve Specialist",

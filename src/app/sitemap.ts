@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://diwash-ghimire.com.np";
+  const baseUrl = "https://erson.studio";
 
   return [
     {

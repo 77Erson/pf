@@ -48,7 +48,7 @@ export function Hero() {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium mb-8"
         >
           <Sparkles className="w-4 h-4" />
-          <span>Video Editor & Creative Professional</span>
+          <span>Professional Video Editor & Brand Content Strategist</span>
         </motion.div>
 
         {/* Name */}
@@ -78,7 +78,7 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-sm md:text-base text-muted-foreground/70 italic max-w-xl mx-auto mb-10"
         >
-          &ldquo;Where creativity meets precision, and every frame tells a story.&rdquo;
+          &ldquo;Trusted by 50+ clients worldwide • Mainstream media background • Available for retainer partnerships&rdquo;
         </motion.p>
 
         {/* CTA Buttons */}

@@ -37,7 +37,9 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        display: ["var(--font-space-grotesk)", "system-ui", "sans-serif"],
+        display: ["var(--font-fraunces)", "var(--font-space-grotesk)", "serif"],
+        fraunces: ["var(--font-fraunces)", "serif"],
+        serif: ["var(--font-fraunces)", "serif"],
       },
       animation: {
         "fade-in": "fade-in 0.6s ease-out forwards",

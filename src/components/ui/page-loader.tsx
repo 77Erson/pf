@@ -46,7 +46,7 @@ export function PageLoader() {
             >
               ERSON
             </motion.div>
-            
+
             {/* Loading bar */}
             <motion.div
               initial={{ width: 0 }}
@@ -54,14 +54,14 @@ export function PageLoader() {
               transition={{ duration: 1.2, ease: "easeInOut" }}
               className="h-0.5 bg-accent mt-4 rounded-full"
             />
-            
+
             {/* Subtle pulse effect */}
             <motion.div
-              animate={{ 
+              animate={{
                 opacity: [0.3, 0.6, 0.3],
               }}
-              transition={{ 
-                duration: 1.5, 
+              transition={{
+                duration: 1.5,
                 repeat: Infinity,
                 ease: "easeInOut"
               }}

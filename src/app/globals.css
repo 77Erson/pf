@@ -198,4 +198,22 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Organizations ticker animation */
+  .animate-organization-scroll {
+    animation: organization-scroll 24s linear infinite;
+  }
+
+  .organization-ticker:hover .animate-organization-scroll {
+    animation-play-state: paused;
+  }
+
+  @keyframes organization-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
 }
