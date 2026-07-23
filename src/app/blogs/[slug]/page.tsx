@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Calendar, Clock, Eye, Tag, MessageSquare, Film } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, Eye, Tag, MessageSquare, Film, Building2, Globe, TrendingUp, ExternalLink } from "lucide-react";
 import { blogsData } from "@/data/blogs";
 import { getBlogBySlug, getAllBlogs } from "@/lib/supabase/blogs-service";
 import { Navbar } from "@/components/layout/navbar";
@@ -126,6 +126,46 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
                 <p className="text-xs text-muted-foreground">{blog.author.role}</p>
               </div>
             </div>
+
+            {/* Featured Brand Card (Brand Name, Social Media Link & Stats) */}
+            {blog.brand && (blog.brand.name || blog.brand.socialLink || blog.brand.stats) && (
+              <div className="mt-6 p-5 rounded-2xl bg-gradient-to-r from-accent/10 via-card to-card border border-accent/25 shadow-soft flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <Building2 className="w-4 h-4 text-accent" />
+                    <span className="text-[11px] font-bold text-accent uppercase tracking-wider">
+                      Featured Brand / Client Partner
+                    </span>
+                  </div>
+                  {blog.brand.name && (
+                    <h3 className="text-lg font-bold tracking-tight text-foreground">
+                      {blog.brand.name}
+                    </h3>
+                  )}
+                </div>
+
+                <div className="flex flex-wrap items-center gap-3">
+                  {blog.brand.stats && (
+                    <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/15 border border-emerald-500/30 text-emerald-400">
+                      <TrendingUp className="w-3.5 h-3.5" />
+                      {blog.brand.stats}
+                    </span>
+                  )}
+                  {blog.brand.socialLink && (
+                    <a
+                      href={blog.brand.socialLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-accent hover:bg-accent/90 text-accent-foreground text-xs font-bold transition-all shadow-sm"
+                    >
+                      <Globe className="w-3.5 h-3.5" />
+                      <span>Visit Brand</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Highlight Video (If present) */}

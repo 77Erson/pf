@@ -1,3 +1,9 @@
+export interface BrandInfo {
+  name?: string;
+  socialLink?: string;
+  stats?: string;
+}
+
 export interface BlogPost {
   id: string;
   slug: string;
@@ -14,6 +20,7 @@ export interface BlogPost {
     role: string;
     avatar: string;
   };
+  brand?: BrandInfo;
   tags: string[];
   content: {
     introduction: string;
@@ -46,6 +53,11 @@ export const blogsData: BlogPost[] = [
       name: "Erson",
       role: "Brand Content Strategist",
       avatar: "/image/cg-communications.webp",
+    },
+    brand: {
+      name: "CG Communications",
+      socialLink: "https://instagram.com",
+      stats: "10M+ Views & 85% Retention",
     },
     tags: ["Video Editing", "Content Strategy", "Retention", "YouTube Growth"],
     content: {

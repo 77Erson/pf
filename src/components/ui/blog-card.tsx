@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Calendar, Clock, Eye } from "lucide-react";
+import { ArrowRight, Calendar, Clock, Eye, Building2 } from "lucide-react";
 import { BlogPost } from "@/data/blogs";
 import { cn } from "@/lib/utils";
 
@@ -39,6 +39,14 @@ export function BlogCard({ blog, index = 0 }: BlogCardProps) {
         <span className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold bg-accent text-accent-foreground shadow-md">
           {blog.category}
         </span>
+
+        {/* Brand Badge */}
+        {blog.brand?.name && (
+          <span className="absolute top-4 right-4 px-2.5 py-1 rounded-full text-[11px] font-bold bg-background/85 backdrop-blur-md border border-border/80 text-foreground shadow-md flex items-center gap-1.5">
+            <Building2 className="w-3 h-3 text-accent" />
+            {blog.brand.name}
+          </span>
+        )}
       </div>
 
       {/* Card Content */}

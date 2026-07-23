@@ -20,6 +20,10 @@ import {
   Clock,
   User,
   Film,
+  Building2,
+  Globe,
+  TrendingUp,
+  ExternalLink,
 } from "lucide-react";
 import type { BlogPost } from "@/data/blogs";
 import { createBlog, updateBlog, uploadMedia } from "@/lib/supabase/blogs-service";
@@ -39,6 +43,11 @@ export function BlogForm({ initialData, isEditing = false }: BlogFormProps) {
   const [coverImage, setCoverImage] = useState(initialData?.coverImage || "");
   const [readTime, setReadTime] = useState(initialData?.readTime || "5 min read");
   const [tagsInput, setTagsInput] = useState(initialData?.tags?.join(", ") || "Video Editing, Content Strategy");
+  
+  // Brand details (just below excerpt/summary)
+  const [brandName, setBrandName] = useState(initialData?.brand?.name || "");
+  const [brandSocialLink, setBrandSocialLink] = useState(initialData?.brand?.socialLink || "");
+  const [brandStats, setBrandStats] = useState(initialData?.brand?.stats || "");
   
   // Author
   const [authorName, setAuthorName] = useState(initialData?.author?.name || "Erson");
@@ -233,6 +242,11 @@ export function BlogForm({ initialData, isEditing = false }: BlogFormProps) {
         role: authorRole,
         avatar: authorAvatar,
       },
+      brand: {
+        name: brandName,
+        socialLink: brandSocialLink,
+        stats: brandStats,
+      },
       tags: tagsArray,
       content: {
         introduction,
@@ -423,6 +437,66 @@ export function BlogForm({ initialData, isEditing = false }: BlogFormProps) {
                 required
                 className="w-full bg-neutral-950 border border-neutral-800 focus:border-red-500/60 rounded-xl py-3 px-4 text-sm text-white placeholder-neutral-600 focus:outline-none focus:ring-2 focus:ring-red-500/20"
               />
+            </div>
+
+            {/* Brand Showcase Section (Brand Name, Social Link & Stats) */}
+            <div className="md:col-span-2 pt-4 mt-2 border-t border-neutral-800/80 space-y-4">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-2">
+                  <Building2 className="w-4 h-4 text-amber-400" />
+                  Brand Showcase Details (Brand Name, Social Media Link & Stats)
+                </label>
+                <span className="text-[11px] text-neutral-400 font-medium bg-neutral-800/60 px-2.5 py-0.5 rounded-md border border-neutral-700/50">
+                  Optional Brand Partner Info
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-neutral-950/80 p-4 rounded-xl border border-neutral-800/90 shadow-inner">
+                {/* Brand Name */}
+                <div>
+                  <label className="block text-[11px] font-semibold text-neutral-300 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                    <Building2 className="w-3.5 h-3.5 text-amber-400" />
+                    Brand Name
+                  </label>
+                  <input
+                    type="text"
+                    value={brandName}
+                    onChange={(e) => setBrandName(e.target.value)}
+                    placeholder="e.g. CG Communications"
+                    className="w-full bg-neutral-900 border border-neutral-800 focus:border-amber-500/60 rounded-xl py-2.5 px-3 text-sm text-white placeholder-neutral-600 focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition-all"
+                  />
+                </div>
+
+                {/* Social Media Link */}
+                <div>
+                  <label className="block text-[11px] font-semibold text-neutral-300 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                    <Globe className="w-3.5 h-3.5 text-sky-400" />
+                    Social Media Link
+                  </label>
+                  <input
+                    type="url"
+                    value={brandSocialLink}
+                    onChange={(e) => setBrandSocialLink(e.target.value)}
+                    placeholder="https://instagram.com/brand"
+                    className="w-full bg-neutral-900 border border-neutral-800 focus:border-sky-500/60 rounded-xl py-2.5 px-3 text-sm text-white placeholder-neutral-600 focus:outline-none focus:ring-2 focus:ring-sky-500/20 transition-all"
+                  />
+                </div>
+
+                {/* Brand Stats */}
+                <div>
+                  <label className="block text-[11px] font-semibold text-neutral-300 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                    <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
+                    Brand Performance Stats
+                  </label>
+                  <input
+                    type="text"
+                    value={brandStats}
+                    onChange={(e) => setBrandStats(e.target.value)}
+                    placeholder="e.g. 10M+ Views & 85% Retention"
+                    className="w-full bg-neutral-900 border border-neutral-800 focus:border-emerald-500/60 rounded-xl py-2.5 px-3 text-sm text-white placeholder-neutral-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -811,6 +885,42 @@ export function BlogForm({ initialData, isEditing = false }: BlogFormProps) {
             </div>
             <h1 className="text-3xl font-extrabold text-white mb-4">{title || "Untitled Blog Post"}</h1>
             <p className="text-neutral-400 text-lg mb-6">{excerpt}</p>
+
+            {/* Brand Showcase Preview */}
+            {(brandName || brandSocialLink || brandStats) && (
+              <div className="mb-8 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-amber-500/10 via-neutral-900 to-neutral-900 border border-amber-500/30 flex flex-wrap items-center justify-between gap-4">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <Building2 className="w-4 h-4 text-amber-400" />
+                    <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">
+                      Featured Brand Partner
+                    </span>
+                  </div>
+                  {brandName && <h4 className="text-lg font-bold text-white">{brandName}</h4>}
+                </div>
+
+                <div className="flex flex-wrap items-center gap-3">
+                  {brandStats && (
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-emerald-500/15 border border-emerald-500/30 text-emerald-400">
+                      <TrendingUp className="w-3.5 h-3.5" />
+                      {brandStats}
+                    </span>
+                  )}
+                  {brandSocialLink && (
+                    <a
+                      href={brandSocialLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black text-xs font-bold transition-all shadow-md"
+                    >
+                      <Globe className="w-3.5 h-3.5" />
+                      <span>Visit Brand</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  )}
+                </div>
+              </div>
+            )}
 
             {coverImage && (
               <div className="relative aspect-video rounded-xl overflow-hidden mb-8 border border-neutral-800">

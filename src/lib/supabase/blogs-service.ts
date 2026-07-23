@@ -21,6 +21,12 @@ interface DBBlogRow {
     role: string;
     avatar: string;
   };
+  brand?: {
+    name?: string;
+    socialLink?: string;
+    social_link?: string;
+    stats?: string;
+  };
   tags: string[];
   content: {
     introduction: string;
@@ -54,6 +60,13 @@ export function formatDBBlogToBlogPost(row: DBBlogRow): BlogPost {
       role: "Brand Content Strategist",
       avatar: "/image/cg-communications.webp",
     },
+    brand: row.brand
+      ? {
+          name: row.brand.name || "",
+          socialLink: row.brand.socialLink || row.brand.social_link || "",
+          stats: row.brand.stats || "",
+        }
+      : undefined,
     tags: row.tags || [],
     content: row.content || {
       introduction: "",
@@ -173,6 +186,7 @@ export async function createBlog(blog: Omit<BlogPost, "id">): Promise<{ success:
     views: blog.views || "0 views",
     likes: blog.likes || "0 likes",
     author: blog.author,
+    brand: blog.brand || null,
     tags: blog.tags,
     content: blog.content,
     video_url: blog.videoUrl || null,
@@ -207,6 +221,7 @@ export async function updateBlog(id: string, blog: Partial<BlogPost>): Promise<{
   if (blog.date !== undefined) payload.date = blog.date;
   if (blog.readTime !== undefined) payload.read_time = blog.readTime;
   if (blog.author !== undefined) payload.author = blog.author;
+  if (blog.brand !== undefined) payload.brand = blog.brand;
   if (blog.tags !== undefined) payload.tags = blog.tags;
   if (blog.content !== undefined) payload.content = blog.content;
   if (blog.videoUrl !== undefined) payload.video_url = blog.videoUrl;
