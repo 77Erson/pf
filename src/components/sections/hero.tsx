@@ -48,7 +48,7 @@ export function Hero() {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium mb-8"
         >
           <Sparkles className="w-4 h-4" />
-          <span>Brand Content Strategist & Professional Video Editor</span>
+          <span>Brand Content Strategist & Video Editor</span>
         </motion.div>
 
         {/* Name */}
@@ -98,12 +98,14 @@ export function Hero() {
             View My Work
           </motion.a>
           <motion.a
-            href="#contact"
+            href="https://calendly.com/erson/consultation-meeting"
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn-outline"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            Contact Me
+            Book a Call
           </motion.a>
         </motion.div>
 
@@ -137,7 +139,7 @@ export function Hero() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
         <motion.a
-          href="#about"
+          href="#services"
           className="flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}

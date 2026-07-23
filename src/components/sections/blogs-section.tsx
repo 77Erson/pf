@@ -15,21 +15,20 @@ export function BlogsSection() {
   const featuredBlogs = blogsData.slice(0, 3);
 
   return (
-    <section id="blogs" className="section" ref={ref}>
+    <section id="blogs" className="section bg-secondary/30" ref={ref}>
       <div className="container-custom">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 max-w-3xl mx-auto"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent text-xs font-semibold uppercase tracking-widest mb-4">
-            <BookOpen className="w-4 h-4" />
-            <span>Insights & Strategy</span>
-          </div>
-          <h2 className="section-heading mt-2">
-            Case Studies <span className="text-accent">and Breakdown</span>
+          <span className="text-accent text-sm font-medium uppercase tracking-widest px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20">
+            Case Studies
+          </span>
+          <h2 className="section-heading mt-4">
+            Insights & <span className="text-accent">Breakdowns</span>
           </h2>
           <p className="section-subheading mx-auto mt-4">
             Deep dives into retention editing, post-production workflows, and building a high-impact brand visual identity.

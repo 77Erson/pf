@@ -64,16 +64,16 @@ export function Organizations() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
+          className="text-center mb-16 max-w-3xl mx-auto"
         >
-          <span className="text-accent text-sm font-medium uppercase tracking-widest">
+          <span className="text-accent text-sm font-medium uppercase tracking-widest px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20">
             Partners
           </span>
           <h2 className="section-heading mt-4">
             Associated <span className="text-accent">Organizations</span>
           </h2>
           <p className="section-subheading mx-auto mt-4">
-            Proud to have collaborated with these amazing organizations
+            Proud to have collaborated with these amazing organizations.
           </p>
         </motion.div>
 

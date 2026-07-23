@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import {
   Mail,
@@ -10,6 +10,9 @@ import {
   CheckCircle,
   Loader2,
   AlertCircle,
+  ArrowRight,
+  ArrowLeft,
+  ChevronDown,
 } from "lucide-react";
 import Image from "next/image";
 import { siteConfig } from "@/data/site-config";
@@ -65,27 +68,81 @@ const contactInfo = [
   },
 ];
 
+const helpOptions = [
+  "Ongoing content editing (retainer)",
+  "One-time project",
+  "Brand strategy / content system",
+  "Not sure yet, want to discuss",
+];
+
+const volumeOptions = [
+  "1-2 videos/month",
+  "3-8 videos/month",
+  "9+ videos/month",
+  "Not sure yet",
+];
+
+const budgetOptions = [
+  "$500-1,500/mo",
+  "$1,500-3,000/mo",
+  "$3,000+/mo",
+  "Let's discuss",
+];
+
 export function Contact() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const [step, setStep] = useState<1 | 2>(1);
   const [formState, setFormState] = useState<"idle" | "loading" | "success" | "error">(
     "idle"
   );
   const [errorMessage, setErrorMessage] = useState("");
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    message: "",
+    helpNeeded: "",
+    company: "",
+    website: "",
+    monthlyVolume: "",
+    budgetRange: "",
   });
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleNextStep = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name.trim() || !formData.email.trim() || !formData.helpNeeded) {
+      setFormState("error");
+      setErrorMessage("Please complete all fields in Step 1 to continue.");
+      setTimeout(() => setFormState("idle"), 4000);
+      return;
+    }
+    setFormState("idle");
+    setErrorMessage("");
+    setStep(2);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Validation
-    if (!formData.name || !formData.email || !formData.message) {
+
+    if (
+      !formData.company.trim() ||
+      !formData.website.trim() ||
+      !formData.monthlyVolume ||
+      !formData.budgetRange
+    ) {
       setFormState("error");
-      setErrorMessage("Please fill in all fields");
-      setTimeout(() => setFormState("idle"), 5000);
+      setErrorMessage("Please complete all fields in Step 2.");
+      setTimeout(() => setFormState("idle"), 4000);
       return;
     }
 
@@ -98,61 +155,65 @@ export function Contact() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
+          "Name": formData.name,
+          "Email": formData.email,
+          "What do you need help with?": formData.helpNeeded,
+          "Company / Brand Name": formData.company,
+          "Website / Social Link": formData.website,
+          "Monthly Content Volume": formData.monthlyVolume,
+          "Budget Range": formData.budgetRange,
         }),
       });
 
       if (response.ok) {
         setFormState("success");
-        setFormData({ name: "", email: "", message: "" });
-        // Reset after showing success
-        setTimeout(() => setFormState("idle"), 5000);
+        setFormData({
+          name: "",
+          email: "",
+          helpNeeded: "",
+          company: "",
+          website: "",
+          monthlyVolume: "",
+          budgetRange: "",
+        });
+        setStep(1);
+        setTimeout(() => setFormState("idle"), 6000);
       } else {
         throw new Error("Network response was not ok");
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error submitting form:", error);
       setFormState("error");
-      setErrorMessage("Sorry, there was a problem sending your message. Please try again later.");
+      setErrorMessage(
+        "Sorry, there was a problem sending your details. Please try again later."
+      );
       setTimeout(() => setFormState("idle"), 5000);
     }
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
   return (
-    <section id="contact" className="section bg-secondary/30" ref={ref}>
-      <div className="container-custom">
+    <section id="contact" className="section bg-background relative overflow-hidden" ref={ref}>
+      <div className="container-custom relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 max-w-3xl mx-auto"
         >
-          <span className="text-accent text-sm font-medium uppercase tracking-widest">
+          <span className="text-accent text-sm font-medium uppercase tracking-widest px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20">
             Contact
           </span>
           <h2 className="section-heading mt-4">
             Get In <span className="text-accent">Touch</span>
           </h2>
           <p className="section-subheading mx-auto mt-4">
-            Ready to bring your video project to life? Let&apos;s discuss how we
-            can work together to create something amazing.
+            Ready to build a repeatable content engine for your brand? Let&apos;s map out your vision together.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-          {/* Contact Info */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          {/* Contact Info (Left Side) */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -195,7 +256,7 @@ export function Contact() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.6 }}
             >
-              <p className="text-sm text-muted-foreground mb-4">
+              <p className="text-sm text-muted-foreground mb-4 font-medium">
                 Connect with me
               </p>
               <div className="flex items-center gap-3">
@@ -222,176 +283,371 @@ export function Contact() {
               </div>
             </motion.div>
 
-            {/* CTA Card */}
+            {/* Quick Hiring WhatsApp CTA Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.7 }}
-              className="p-6 rounded-2xl bg-gradient-to-br from-accent/10 to-accent/5 border border-accent/20"
+              className="p-6 rounded-2xl bg-gradient-to-br from-accent/10 via-accent/5 to-transparent border border-accent/20"
             >
               <h3 className="font-display font-semibold text-lg mb-2">
                 Prefer Quick Hiring?
               </h3>
               <p className="text-sm text-muted-foreground mb-4">
-                Contact me on Whatsapp for quick project quotes and instant booking.
+                Contact me directly on WhatsApp for instant project inquiries and quick quotes.
               </p>
               <motion.a
-                href="https://wa.me/9779825968458?text=Hi, Erson I'd like to discuss a project."
+                href="https://wa.me/9779825968458?text=Hi%20Erson,%20I'd%20like%20to%20discuss%20a%20project."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-accent text-sm"
+                className="btn-accent text-sm inline-flex items-center gap-2"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Whatsapp Contact
+                WhatsApp Direct Contact
               </motion.a>
             </motion.div>
           </motion.div>
 
-          {/* Contact Form */}
+          {/* Form Container (Right Side - Reframed 2-Step Form) */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
+            className="p-8 rounded-3xl bg-card border border-border shadow-soft-lg"
           >
-            <form
-              onSubmit={handleSubmit}
-              className="space-y-6 p-8 rounded-3xl bg-card border border-border"
-            >
-              <h3 className="font-display font-semibold text-xl mb-6">
-                Send Me a Message
+            {/* Header & Subtitle */}
+            <div className="mb-6">
+              <h3 className="font-display font-semibold text-2xl mb-1.5 text-foreground">
+                Tell me about your project
               </h3>
+              <p className="text-xs sm:text-sm text-muted-foreground">
+                Takes about a minute, I&apos;ll get back to you within 24 hours.
+              </p>
+            </div>
 
-              {/* Name Field */}
-              <div className="space-y-2">
-                <label
-                  htmlFor="name"
-                  className="text-sm font-medium text-muted-foreground"
-                >
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className={cn(
-                    "w-full px-4 py-3 rounded-xl bg-secondary border border-border",
-                    "focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent",
-                    "transition-all duration-300 placeholder:text-muted-foreground/50"
-                  )}
-                  placeholder="Your name"
-                />
+            {/* Visual Step Progress Indicator */}
+            <div className="mb-8">
+              <div className="flex items-center justify-between text-xs font-semibold mb-2">
+                <span className={cn(step >= 1 ? "text-accent" : "text-muted-foreground")}>
+                  Step 1: Project Need
+                </span>
+                <span className={cn(step === 2 ? "text-accent" : "text-muted-foreground")}>
+                  Step 2: Brand & Budget
+                </span>
               </div>
-
-              {/* Email Field */}
-              <div className="space-y-2">
-                <label
-                  htmlFor="email"
-                  className="text-sm font-medium text-muted-foreground"
-                >
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className={cn(
-                    "w-full px-4 py-3 rounded-xl bg-secondary border border-border",
-                    "focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent",
-                    "transition-all duration-300 placeholder:text-muted-foreground/50"
-                  )}
-                  placeholder="your@email.com"
-                />
-              </div>
-
-              {/* Message Field */}
-              <div className="space-y-2">
-                <label
-                  htmlFor="message"
-                  className="text-sm font-medium text-muted-foreground"
-                >
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={5}
-                  className={cn(
-                    "w-full px-4 py-3 rounded-xl bg-secondary border border-border resize-none",
-                    "focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent",
-                    "transition-all duration-300 placeholder:text-muted-foreground/50"
-                  )}
-                  placeholder="Tell me about your project..."
-                />
-              </div>
-
-              {/* Submit Button */}
-              <motion.button
-                type="submit"
-                disabled={formState === "loading"}
-                className={cn(
-                  "w-full btn-accent justify-center",
-                  formState === "success" && "bg-green-500 hover:bg-green-500",
-                  formState === "error" && "bg-red-500 hover:bg-red-500"
-                )}
-                whileHover={formState === "idle" ? { scale: 1.01 } : {}}
-                whileTap={formState === "idle" ? { scale: 0.99 } : {}}
-              >
-                {formState === "idle" && (
-                  <>
-                    <Send className="w-4 h-4" />
-                    Send Message
-                  </>
-                )}
-                {formState === "loading" && (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    Sending...
-                  </>
-                )}
-                {formState === "success" && (
-                  <>
-                    <CheckCircle className="w-4 h-4" />
-                    Message Sent!
-                  </>
-                )}
-                {formState === "error" && (
-                  <>
-                    <AlertCircle className="w-4 h-4" />
-                    Try Again
-                  </>
-                )}
-              </motion.button>
-
-              {/* Form Message */}
-              {formState === "success" && (
+              <div className="w-full h-1.5 bg-secondary rounded-full overflow-hidden">
                 <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-4 rounded-xl bg-green-500/10 border border-green-500/30 text-green-500 text-sm text-center"
+                  className="h-full bg-accent rounded-full"
+                  initial={{ width: "50%" }}
+                  animate={{ width: step === 1 ? "50%" : "100%" }}
+                  transition={{ duration: 0.4 }}
+                />
+              </div>
+            </div>
+
+            <AnimatePresence mode="wait">
+              {step === 1 ? (
+                /* STEP 1 FORM */
+                <motion.form
+                  key="step-1"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  transition={{ duration: 0.3 }}
+                  onSubmit={handleNextStep}
+                  className="space-y-5"
                 >
-                  Thank you for your message! I will get back to you soon.
-                </motion.div>
-              )}
-              {formState === "error" && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-500 text-sm text-center"
+                  {/* Name */}
+                  <div className="space-y-2">
+                    <label htmlFor="name" className="text-sm font-medium text-foreground flex items-center gap-1">
+                      Name <span className="text-accent">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      required
+                      className={cn(
+                        "w-full px-4 py-3 rounded-xl bg-secondary border border-border",
+                        "focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent text-sm",
+                        "transition-all duration-300 placeholder:text-muted-foreground/50"
+                      )}
+                      placeholder="Your name"
+                    />
+                  </div>
+
+                  {/* Email */}
+                  <div className="space-y-2">
+                    <label htmlFor="email" className="text-sm font-medium text-foreground flex items-center gap-1">
+                      Email <span className="text-accent">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      className={cn(
+                        "w-full px-4 py-3 rounded-xl bg-secondary border border-border",
+                        "focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent text-sm",
+                        "transition-all duration-300 placeholder:text-muted-foreground/50"
+                      )}
+                      placeholder="your@email.com"
+                    />
+                  </div>
+
+                  {/* What do you need help with? */}
+                  <div className="space-y-2">
+                    <label htmlFor="helpNeeded" className="text-sm font-medium text-foreground flex items-center gap-1">
+                      What do you need help with? <span className="text-accent">*</span>
+                    </label>
+                    <div className="relative">
+                      <select
+                        id="helpNeeded"
+                        name="helpNeeded"
+                        value={formData.helpNeeded}
+                        onChange={handleInputChange}
+                        required
+                        className={cn(
+                          "w-full px-4 py-3 rounded-xl bg-secondary border border-border appearance-none text-sm",
+                          "focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent cursor-pointer",
+                          "transition-all duration-300",
+                          !formData.helpNeeded && "text-muted-foreground/60"
+                        )}
+                      >
+                        <option value="" disabled>
+                          Select an option...
+                        </option>
+                        {helpOptions.map((opt) => (
+                          <option key={opt} value={opt} className="text-foreground bg-card">
+                            {opt}
+                          </option>
+                        ))}
+                      </select>
+                      <ChevronDown className="w-4 h-4 text-muted-foreground absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    </div>
+                  </div>
+
+                  {/* Step 1 Error Message */}
+                  {formState === "error" && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-500 text-xs text-center flex items-center justify-center gap-2"
+                    >
+                      <AlertCircle className="w-4 h-4 shrink-0" />
+                      <span>{errorMessage}</span>
+                    </motion.div>
+                  )}
+
+                  {/* Next Button */}
+                  <motion.button
+                    type="submit"
+                    className="w-full btn-accent justify-center mt-4"
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.99 }}
+                  >
+                    <span>Continue to Step 2</span>
+                    <ArrowRight className="w-4 h-4 ml-1" />
+                  </motion.button>
+                </motion.form>
+              ) : (
+                /* STEP 2 FORM */
+                <motion.form
+                  key="step-2"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                  onSubmit={handleSubmit}
+                  className="space-y-5"
                 >
-                  {errorMessage}
-                </motion.div>
+                  {/* Company / Brand Name */}
+                  <div className="space-y-2">
+                    <label htmlFor="company" className="text-sm font-medium text-foreground flex items-center gap-1">
+                      Company / Brand Name <span className="text-accent">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="company"
+                      name="company"
+                      value={formData.company}
+                      onChange={handleInputChange}
+                      required
+                      className={cn(
+                        "w-full px-4 py-3 rounded-xl bg-secondary border border-border",
+                        "focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent text-sm",
+                        "transition-all duration-300 placeholder:text-muted-foreground/50"
+                      )}
+                      placeholder="e.g. Acme Studio or your brand name"
+                    />
+                  </div>
+
+                  {/* Website / Social Link */}
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between">
+                      <label htmlFor="website" className="text-sm font-medium text-foreground flex items-center gap-1">
+                        Website / Social Link <span className="text-accent">*</span>
+                      </label>
+                    </div>
+                    <p className="text-xs text-accent font-medium">
+                      So I can take a quick look before we talk
+                    </p>
+                    <input
+                      type="text"
+                      id="website"
+                      name="website"
+                      value={formData.website}
+                      onChange={handleInputChange}
+                      required
+                      className={cn(
+                        "w-full px-4 py-3 rounded-xl bg-secondary border border-border mt-1",
+                        "focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent text-sm",
+                        "transition-all duration-300 placeholder:text-muted-foreground/50"
+                      )}
+                      placeholder="https://... or @username"
+                    />
+                  </div>
+
+                  {/* Monthly content volume */}
+                  <div className="space-y-2">
+                    <label htmlFor="monthlyVolume" className="text-sm font-medium text-foreground flex items-center gap-1">
+                      Monthly content volume <span className="text-accent">*</span>
+                    </label>
+                    <div className="relative">
+                      <select
+                        id="monthlyVolume"
+                        name="monthlyVolume"
+                        value={formData.monthlyVolume}
+                        onChange={handleInputChange}
+                        required
+                        className={cn(
+                          "w-full px-4 py-3 rounded-xl bg-secondary border border-border appearance-none text-sm",
+                          "focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent cursor-pointer",
+                          "transition-all duration-300",
+                          !formData.monthlyVolume && "text-muted-foreground/60"
+                        )}
+                      >
+                        <option value="" disabled>
+                          Select estimated volume...
+                        </option>
+                        {volumeOptions.map((opt) => (
+                          <option key={opt} value={opt} className="text-foreground bg-card">
+                            {opt}
+                          </option>
+                        ))}
+                      </select>
+                      <ChevronDown className="w-4 h-4 text-muted-foreground absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    </div>
+                  </div>
+
+                  {/* Budget range */}
+                  <div className="space-y-2">
+                    <label htmlFor="budgetRange" className="text-sm font-medium text-foreground flex items-center gap-1">
+                      Budget range <span className="text-accent">*</span>
+                    </label>
+                    <div className="relative">
+                      <select
+                        id="budgetRange"
+                        name="budgetRange"
+                        value={formData.budgetRange}
+                        onChange={handleInputChange}
+                        required
+                        className={cn(
+                          "w-full px-4 py-3 rounded-xl bg-secondary border border-border appearance-none text-sm",
+                          "focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent cursor-pointer",
+                          "transition-all duration-300",
+                          !formData.budgetRange && "text-muted-foreground/60"
+                        )}
+                      >
+                        <option value="" disabled>
+                          Select budget range...
+                        </option>
+                        {budgetOptions.map((opt) => (
+                          <option key={opt} value={opt} className="text-foreground bg-card">
+                            {opt}
+                          </option>
+                        ))}
+                      </select>
+                      <ChevronDown className="w-4 h-4 text-muted-foreground absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    </div>
+                  </div>
+
+                  {/* Buttons: Back & Submit */}
+                  <div className="flex items-center gap-3 pt-2">
+                    <button
+                      type="button"
+                      onClick={() => setStep(1)}
+                      className="px-4 py-3 rounded-xl bg-secondary hover:bg-secondary/80 border border-border text-foreground text-sm font-medium transition-colors flex items-center justify-center gap-1.5"
+                    >
+                      <ArrowLeft className="w-4 h-4" />
+                      Back
+                    </button>
+                    <motion.button
+                      type="submit"
+                      disabled={formState === "loading"}
+                      className={cn(
+                        "flex-1 btn-accent justify-center text-sm py-3",
+                        formState === "success" && "bg-green-500 hover:bg-green-500",
+                        formState === "error" && "bg-red-500 hover:bg-red-500"
+                      )}
+                      whileHover={formState === "idle" ? { scale: 1.01 } : {}}
+                      whileTap={formState === "idle" ? { scale: 0.99 } : {}}
+                    >
+                      {formState === "idle" && (
+                        <>
+                          <Send className="w-4 h-4" />
+                          Send Message
+                        </>
+                      )}
+                      {formState === "loading" && (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          Sending...
+                        </>
+                      )}
+                      {formState === "success" && (
+                        <>
+                          <CheckCircle className="w-4 h-4" />
+                          Message Sent!
+                        </>
+                      )}
+                      {formState === "error" && (
+                        <>
+                          <AlertCircle className="w-4 h-4" />
+                          Try Again
+                        </>
+                      )}
+                    </motion.button>
+                  </div>
+
+                  {/* Feedback Messages */}
+                  {formState === "success" && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-4 rounded-xl bg-green-500/10 border border-green-500/30 text-green-500 text-sm text-center font-medium"
+                    >
+                      Thank you! Your project details have been sent successfully. I will get back to you within 24 hours.
+                    </motion.div>
+                  )}
+                  {formState === "error" && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-500 text-sm text-center flex items-center justify-center gap-2"
+                    >
+                      <AlertCircle className="w-4 h-4 shrink-0" />
+                      <span>{errorMessage}</span>
+                    </motion.div>
+                  )}
+                </motion.form>
               )}
-            </form>
+            </AnimatePresence>
           </motion.div>
         </div>
       </div>

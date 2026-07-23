@@ -27,20 +27,20 @@ export function Work() {
       : projects.filter((p) => p.category === activeCategory);
 
   return (
-    <section id="work" className="section bg-secondary/30" ref={ref}>
+    <section id="work" className="section bg-background" ref={ref}>
       <div className="container-custom">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-16 max-w-3xl mx-auto"
         >
-          <span className="text-accent text-sm font-medium uppercase tracking-widest">
+          <span className="text-accent text-sm font-medium uppercase tracking-widest px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20">
             Portfolio
           </span>
           <h2 className="section-heading mt-4">
-            Featured <span className="text-accent">Work</span>
+            Production <span className="text-accent">Projects</span>
           </h2>
           <p className="section-subheading mx-auto mt-4">
             A showcase of projects that demonstrate creativity, precision, and
@@ -62,8 +62,8 @@ export function Work() {
               className={cn(
                 "px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300",
                 activeCategory === cat.key
-                  ? "bg-accent text-accent-foreground"
-                  : "bg-card border border-border hover:border-accent/50"
+                  ? "bg-accent text-accent-foreground shadow-md"
+                  : "bg-card border border-border hover:border-accent/50 text-muted-foreground hover:text-foreground"
               )}
             >
               {cat.label}
@@ -87,51 +87,55 @@ export function Work() {
                 transition={{ duration: 0.4, delay: index * 0.05 }}
                 className="group relative"
               >
-                <div
-                  className={cn(
-                    "relative aspect-video rounded-2xl overflow-hidden bg-muted",
-                    "border border-border hover:border-accent/50 transition-all duration-300"
-                  )}
-                >
-                  {/* YouTube Embed */}
-                  {project.youtubeId ? (
-                    <iframe
-                      className="absolute inset-0 w-full h-full"
-                      src={`https://www.youtube.com/embed/${project.youtubeId}`}
-                      title={project.title}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      allowFullScreen
-                    />
-                  ) : (
-                    <>
-                      {/* Placeholder for thumbnail */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-accent/5 to-transparent" />
-                      <div 
-                        className="absolute inset-0 flex items-center justify-center cursor-pointer"
-                        onClick={() => setSelectedProject(project)}
-                      >
-                        <div className="w-16 h-16 rounded-full bg-background/80 flex items-center justify-center group-hover:scale-110 transition-transform">
-                          <Play className="w-6 h-6 text-accent ml-1" />
+                <div className="rounded-3xl bg-card border border-border/80 p-3.5 shadow-soft hover:shadow-soft-lg hover:border-accent/50 transition-all duration-300 card-hover">
+                  <div
+                    className={cn(
+                      "relative aspect-video rounded-2xl overflow-hidden bg-muted",
+                      "border border-border/50"
+                    )}
+                  >
+                    {/* YouTube Embed */}
+                    {project.youtubeId ? (
+                      <iframe
+                        className="absolute inset-0 w-full h-full"
+                        src={`https://www.youtube.com/embed/${project.youtubeId}`}
+                        title={project.title}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerPolicy="strict-origin-when-cross-origin"
+                        allowFullScreen
+                      />
+                    ) : (
+                      <>
+                        {/* Placeholder for thumbnail */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-accent/5 to-transparent" />
+                        <div 
+                          className="absolute inset-0 flex items-center justify-center cursor-pointer"
+                          onClick={() => setSelectedProject(project)}
+                        >
+                          <div className="w-16 h-16 rounded-full bg-background/80 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <Play className="w-6 h-6 text-accent ml-1" />
+                          </div>
                         </div>
-                      </div>
-                    </>
-                  )}
-                </div>
+                      </>
+                    )}
+                  </div>
 
-                {/* Info Below */}
-                <div className="mt-4">
-                  <h3 className="font-medium">{project.title}</h3>
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    {project.tags.slice(0, 3).map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-xs px-2 py-1 rounded-lg bg-secondary text-muted-foreground"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                  {/* Info Below */}
+                  <div className="p-3">
+                    <h3 className="font-display font-semibold text-base group-hover:text-accent transition-colors">
+                      {project.title}
+                    </h3>
+                    <div className="flex flex-wrap gap-1.5 mt-2.5">
+                      {project.tags.slice(0, 3).map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-xs px-2.5 py-1 rounded-lg bg-secondary text-muted-foreground font-medium"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </motion.div>

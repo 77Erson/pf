@@ -48,14 +48,13 @@ export function About() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 max-w-3xl mx-auto"
         >
-          <span className="text-accent text-sm font-medium uppercase tracking-widest">
+          <span className="text-accent text-sm font-medium uppercase tracking-widest px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20">
             About Me
           </span>
           <h2 className="section-heading mt-4">
-            The Story Behind{" "}
-            <span className="text-accent">The Craft</span>
+            The Story Behind <span className="text-accent">The Craft</span>
           </h2>
         </motion.div>
 

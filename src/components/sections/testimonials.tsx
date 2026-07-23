@@ -29,14 +29,17 @@ export function Testimonials() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 max-w-3xl mx-auto"
         >
-          <span className="text-accent text-sm font-medium uppercase tracking-widest">
+          <span className="text-accent text-sm font-medium uppercase tracking-widest px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20">
             Testimonials
           </span>
           <h2 className="section-heading mt-4">
             What Clients <span className="text-accent">Say</span>
           </h2>
+          <p className="section-subheading mx-auto mt-4">
+            Real feedback from creators, brands, and agencies I&apos;ve partnered with.
+          </p>
         </motion.div>
 
         {/* Featured Testimonial - Slider */}

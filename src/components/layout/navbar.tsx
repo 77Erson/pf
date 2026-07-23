@@ -122,12 +122,14 @@ export function Navbar() {
 
             {/* Desktop CTA */}
             <motion.a
-              href="#contact"
+              href="https://calendly.com/erson/consultation-meeting"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hidden md:flex btn-accent text-sm"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              Let&apos;s Talk
+              Book a Call
             </motion.a>
           </div>
         </nav>
@@ -168,14 +170,16 @@ export function Navbar() {
                   </motion.a>
                 ))}
                 <motion.a
-                  href="#contact"
+                  href="https://calendly.com/erson/consultation-meeting"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="btn-accent mt-4 justify-center"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
                 >
-                  Let&apos;s Talk
+                  Book a Call
                 </motion.a>
               </div>
             </motion.nav>
