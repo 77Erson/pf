@@ -61,10 +61,7 @@ export function BlogCard({ blog, index = 0 }: BlogCardProps) {
             <Clock className="w-3.5 h-3.5 text-accent" />
             {blog.readTime}
           </span>
-          <span className="flex items-center gap-1.5">
-            <Eye className="w-3.5 h-3.5 text-accent" />
-            {blog.views}
-          </span>
+          
         </div>
 
         {/* Basic Title */}
