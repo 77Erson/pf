@@ -32,7 +32,7 @@ export const siteConfig: SiteConfig = {
   description:
     "Helping businesses turn raw footage into content that drives watch time, conversions, and brand recall.",
   url: "https://erson.studio",
-  email: "erson.editz@gmail.com",
+  email: "contact@erson.studio",
   phone: "+977 9825968458",
   location: "Based in Nepal, flexible with clients worldwide",
   social: [
