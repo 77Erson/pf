@@ -163,3 +163,95 @@ export function generateServiceSchema(): ServiceSchema {
       "Professional video editing services including color grading, motion graphics, audio synchronization, and storytelling for YouTube, commercials, and social media content.",
   };
 }
+
+export interface FAQPageSchema {
+  "@context": "https://schema.org";
+  "@type": "FAQPage";
+  mainEntity: Array<{
+    "@type": "Question";
+    name: string;
+    acceptedAnswer: {
+      "@type": "Answer";
+      text: string;
+    };
+  }>;
+}
+
+// Generate FAQ Schema for Services and GEO Search Optimization
+export function generateFAQSchema(): FAQPageSchema {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What is included in a Content Partnership retainer?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Content Partnership retainers provide ongoing monthly post-production services including video editing, motion graphics, custom color grading (DaVinci Resolve), sound design, script polishing, and direct brand strategy support.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How long does a retention video edit take?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Short-form video edits (Reels/Shorts) typically take 24–48 hours, while long-form YouTube or commercial edits take 3–5 business days. Retainer client projects receive priority delivery timelines.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What is the difference between a project rate and a monthly retainer?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "A project rate covers a single video edit with fixed revision rounds. A monthly retainer reserves guaranteed editing capacity, lowers cost-per-video, accelerates turnaround, and establishes consistent brand identity.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How does Erson Studio scale YouTube channels from 8K to 10M+ views?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "We utilize a 3-second kinetic hook formula combined with visual pattern interrupts every 3 to 5 seconds and color-graded visual consistency, increasing viewer watch time by over 400%.",
+        },
+      },
+    ],
+  };
+}
+
+// Generate BlogPosting Schema for Article Pages
+export function generateBlogPostingSchema(blog: {
+  title: string;
+  excerpt: string;
+  slug: string;
+  coverImage: string;
+  date: string;
+  author: { name: string };
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: blog.title,
+    description: blog.excerpt,
+    url: `https://erson.studio/blogs/${blog.slug}`,
+    image: blog.coverImage.startsWith("http")
+      ? blog.coverImage
+      : `https://erson.studio${blog.coverImage}`,
+    datePublished: blog.date,
+    author: {
+      "@type": "Person",
+      name: blog.author.name || "Erson",
+      url: "https://erson.studio",
+    },
+    publisher: {
+      "@type": "Person",
+      name: "Diwash Ghimire",
+      url: "https://erson.studio",
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://erson.studio/blogs/${blog.slug}`,
+    },
+  };
+}
+

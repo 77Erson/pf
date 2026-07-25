@@ -102,7 +102,7 @@ export function Organizations() {
                 >
                   <span className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl bg-background/95 p-2.5 ring-1 ring-border/70 shadow-sm md:h-16 md:w-16">
                     <img
-                      alt={`${organization.name} logo`}
+                      alt={`${organization.name} client logo - Video Production & Strategy Partner`}
                       src={organization.logo}
                       className="max-h-full max-w-full object-contain"
                     />

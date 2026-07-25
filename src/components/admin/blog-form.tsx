@@ -76,6 +76,30 @@ export function BlogForm({ initialData, isEditing = false }: BlogFormProps) {
     ]
   );
 
+  // FAQs
+  const [faqs, setFaqs] = useState<{ question: string; answer: string }[]>(
+    initialData?.faqs || [
+      {
+        question: "Sample Question?",
+        answer: "Detailed answer explaining the video strategy...",
+      },
+    ]
+  );
+
+  const addFaq = () => {
+    setFaqs([...faqs, { question: "", answer: "" }]);
+  };
+
+  const removeFaq = (index: number) => {
+    setFaqs(faqs.filter((_, i) => i !== index));
+  };
+
+  const updateFaqField = (index: number, field: "question" | "answer", value: string) => {
+    const updated = [...faqs];
+    updated[index][field] = value;
+    setFaqs(updated);
+  };
+
   // UI States
   const [loading, setLoading] = useState(false);
   const [uploadingCover, setUploadingCover] = useState(false);
@@ -253,6 +277,7 @@ export function BlogForm({ initialData, isEditing = false }: BlogFormProps) {
         sections,
         conclusion,
       },
+      faqs,
       videoUrl: videoUrl || undefined,
     };
 
@@ -843,6 +868,75 @@ export function BlogForm({ initialData, isEditing = false }: BlogFormProps) {
           </div>
         </div>
 
+        {/* Section 5: Article FAQs */}
+        <div className="bg-neutral-900/60 border border-neutral-800/80 backdrop-blur-md rounded-2xl p-6 space-y-6">
+          <div className="flex items-center justify-between border-b border-neutral-800 pb-3">
+            <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-amber-400" /> Article FAQs ({faqs.length})
+            </h2>
+            <button
+              type="button"
+              onClick={addFaq}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-500/20 border border-amber-500/30 hover:bg-amber-500/30 text-amber-300 text-xs font-semibold rounded-lg transition-colors"
+            >
+              <Plus className="w-3.5 h-3.5" /> Add FAQ Question
+            </button>
+          </div>
+
+          <p className="text-xs text-neutral-400">
+            Add custom Q&A items to display an interactive FAQ section on this blog post for users and AI search engines.
+          </p>
+
+          <div className="space-y-4">
+            {faqs.map((faq, idx) => (
+              <div
+                key={idx}
+                className="p-4 rounded-xl bg-neutral-950/80 border border-neutral-800 space-y-3 relative"
+              >
+                <div className="flex items-center justify-between border-b border-neutral-800 pb-2">
+                  <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">
+                    FAQ #{idx + 1}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => removeFaq(idx)}
+                    className="text-neutral-500 hover:text-red-400 transition-colors p-1"
+                    title="Remove FAQ"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-medium text-neutral-400 mb-1">
+                    Question
+                  </label>
+                  <input
+                    type="text"
+                    value={faq.question}
+                    onChange={(e) => updateFaqField(idx, "question", e.target.value)}
+                    placeholder="e.g. How long does a retention video edit take?"
+                    className="w-full bg-neutral-900 border border-neutral-800 focus:border-amber-500/60 rounded-lg py-2.5 px-3 text-sm text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-medium text-neutral-400 mb-1">
+                    Answer
+                  </label>
+                  <textarea
+                    value={faq.answer}
+                    onChange={(e) => updateFaqField(idx, "answer", e.target.value)}
+                    rows={2}
+                    placeholder="Provide a clear, direct answer..."
+                    className="w-full bg-neutral-900 border border-neutral-800 focus:border-amber-500/60 rounded-lg py-2.5 px-3 text-sm text-white"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Submit Actions */}
         <div className="flex items-center justify-end gap-4">
           <button
@@ -957,6 +1051,23 @@ export function BlogForm({ initialData, isEditing = false }: BlogFormProps) {
                 </div>
               ))}
               <p className="text-base leading-relaxed pt-4 border-t border-neutral-800">{conclusion}</p>
+
+              {/* FAQs Live Preview */}
+              {faqs.length > 0 && (
+                <div className="pt-6 border-t border-neutral-800 space-y-4">
+                  <h4 className="text-lg font-bold text-white flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-amber-400" /> Article FAQs ({faqs.length})
+                  </h4>
+                  <div className="space-y-3">
+                    {faqs.map((f, i) => (
+                      <div key={i} className="p-4 rounded-xl bg-neutral-900 border border-neutral-800 space-y-1 text-sm">
+                        <p className="font-semibold text-amber-300">Q: {f.question}</p>
+                        <p className="text-neutral-400">A: {f.answer}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

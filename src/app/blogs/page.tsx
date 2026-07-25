@@ -3,6 +3,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import { BlogsClient } from "@/components/blogs/blogs-client";
+import { getAllBlogs } from "@/lib/supabase/blogs-service";
 
 export const metadata: Metadata = {
   title: "Blogs & Content Strategy Playbooks | Erson",
@@ -19,15 +20,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogsPage() {
+export default async function BlogsPage() {
+  const blogs = await getAllBlogs();
+
   return (
     <>
       <main className="relative overflow-hidden min-h-screen pt-24 pb-16">
         <Navbar />
-        <BlogsClient />
+        <BlogsClient initialBlogs={blogs} />
         <Footer />
       </main>
       <ScrollToTop />
     </>
   );
 }
+

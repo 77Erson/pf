@@ -3,9 +3,10 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { BookOpen, Search, Sparkles } from "lucide-react";
-import { type BlogPost } from "@/data/blogs";
+import { blogsData, type BlogPost } from "@/data/blogs";
 import { getAllBlogs } from "@/lib/supabase/blogs-service";
 import { BlogCard } from "@/components/ui/blog-card";
+import { FAQAccordion } from "@/components/ui/faq-accordion";
 
 const categories = [
   "All",
@@ -15,20 +16,47 @@ const categories = [
   "Brand Building",
 ];
 
-export function BlogsClient() {
-  const [blogs, setBlogs] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
+const generalFaqs = [
+  {
+    question: "What is included in a Content Partnership retainer?",
+    answer: "Content Partnership retainers provide ongoing monthly post-production services including video editing, motion graphics, custom color grading (DaVinci Resolve), sound design, script polishing, and direct brand strategy support.",
+  },
+  {
+    question: "How long does a retention video edit take?",
+    answer: "Short-form video edits (Reels/Shorts) typically take 24–48 hours, while long-form YouTube or commercial edits take 3–5 business days. Retainer client projects receive priority delivery timelines.",
+  },
+  {
+    question: "What is the difference between a project rate and a monthly retainer?",
+    answer: "A project rate covers a single video edit with fixed revision rounds. A monthly retainer reserves guaranteed editing capacity, lowers cost-per-video, accelerates turnaround, and establishes consistent brand identity.",
+  },
+  {
+    question: "How does Erson Studio scale content from 8K to 10M+ views?",
+    answer: "We utilize a kinetic hook formula combined with visual pattern interrupts and color-graded visual consistency, increasing viewer watch time by over 400%.",
+  },
+];
+
+interface BlogsClientProps {
+  initialBlogs?: BlogPost[];
+}
+
+export function BlogsClient({ initialBlogs = [] }: BlogsClientProps) {
+  const [blogs, setBlogs] = useState<BlogPost[]>(() =>
+    initialBlogs && initialBlogs.length > 0 ? initialBlogs : blogsData
+  );
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     async function load() {
       const data = await getAllBlogs();
-      setBlogs(data);
-      setLoading(false);
+      if (data && data.length > 0) {
+        setBlogs(data);
+      }
     }
     load();
   }, []);
+
+
 
   const filteredBlogs = blogs.filter((blog) => {
     const matchesCategory =
@@ -71,11 +99,10 @@ export function BlogsClient() {
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
-                activeCategory === cat
+              className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${activeCategory === cat
                   ? "bg-accent text-accent-foreground shadow-md"
                   : "bg-card border border-border text-muted-foreground hover:text-foreground hover:bg-secondary"
-              }`}
+                }`}
             >
               {cat}
             </button>
@@ -120,6 +147,13 @@ export function BlogsClient() {
           </button>
         </div>
       )}
+
+      {/* Frequently Asked Questions Section */}
+      <FAQAccordion
+        items={generalFaqs}
+        title="Post-Production & Retainer FAQs"
+        subtitle="Common questions about our video editing process, turnaround times, and ongoing retainer partnerships."
+      />
     </div>
   );
 }

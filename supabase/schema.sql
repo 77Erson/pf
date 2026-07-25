@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS public.blogs (
   brand       JSONB DEFAULT NULL,
   tags        JSONB DEFAULT '[]',
   content     JSONB NOT NULL DEFAULT '{"introduction": "", "sections": [], "conclusion": ""}',
+  faqs        JSONB DEFAULT '[]',
   video_url   TEXT,
   created_at  TIMESTAMPTZ DEFAULT now()
 );

@@ -39,6 +39,7 @@ interface DBBlogRow {
     }[];
     conclusion: string;
   };
+  faqs?: { question: string; answer: string }[];
   video_url?: string;
   created_at?: string;
 }
@@ -62,10 +63,10 @@ export function formatDBBlogToBlogPost(row: DBBlogRow): BlogPost {
     },
     brand: row.brand
       ? {
-          name: row.brand.name || "",
-          socialLink: row.brand.socialLink || row.brand.social_link || "",
-          stats: row.brand.stats || "",
-        }
+        name: row.brand.name || "",
+        socialLink: row.brand.socialLink || row.brand.social_link || "",
+        stats: row.brand.stats || "",
+      }
       : undefined,
     tags: row.tags || [],
     content: row.content || {
@@ -73,8 +74,30 @@ export function formatDBBlogToBlogPost(row: DBBlogRow): BlogPost {
       sections: [],
       conclusion: "",
     },
+    faqs: row.faqs || (row.content as any)?.faqs || [],
     videoUrl: row.video_url || undefined,
   };
+}
+
+/**
+ * Timeout promise wrapper to prevent slow DB connections from hanging page renders
+ */
+async function withTimeout<T>(promise: Promise<T>, timeoutMs: number, fallbackValue: T): Promise<T> {
+  let timer: NodeJS.Timeout;
+  const timeoutPromise = new Promise<T>((resolve) => {
+    timer = setTimeout(() => {
+      resolve(fallbackValue);
+    }, timeoutMs);
+  });
+
+  try {
+    const result = await Promise.race([promise, timeoutPromise]);
+    clearTimeout(timer!);
+    return result;
+  } catch {
+    clearTimeout(timer!);
+    return fallbackValue;
+  }
 }
 
 /**
@@ -82,30 +105,30 @@ export function formatDBBlogToBlogPost(row: DBBlogRow): BlogPost {
  */
 export async function getAllBlogs(): Promise<BlogPost[]> {
   if (!isSupabaseConfigured()) {
-    console.warn("Supabase is not configured. Falling back to local blogs data.");
     return blogsData;
   }
 
-  try {
-    const { data, error } = await supabase
-      .from("blogs")
-      .select("*")
-      .order("created_at", { ascending: false });
+  const fetchFromSupabase = async (): Promise<BlogPost[]> => {
+    try {
+      const { data, error } = await supabase
+        .from("blogs")
+        .select("*")
+        .order("created_at", { ascending: false });
 
-    if (error) {
-      console.error("Error fetching blogs from Supabase:", error.message);
+      if (error || !data || data.length === 0) {
+        return blogsData;
+      }
+
+      const dbBlogs = data.map((item) => formatDBBlogToBlogPost(item as DBBlogRow));
+      const existingSlugs = new Set(dbBlogs.map((b) => b.slug));
+      const missingStatic = blogsData.filter((b) => !existingSlugs.has(b.slug));
+      return [...dbBlogs, ...missingStatic];
+    } catch {
       return blogsData;
     }
+  };
 
-    if (!data || data.length === 0) {
-      return blogsData;
-    }
-
-    return data.map((item) => formatDBBlogToBlogPost(item as DBBlogRow));
-  } catch (err) {
-    console.error("Unexpected error in getAllBlogs:", err);
-    return blogsData;
-  }
+  return withTimeout(fetchFromSupabase(), 800, blogsData);
 }
 
 /**
@@ -189,10 +212,24 @@ export async function createBlog(blog: Omit<BlogPost, "id">): Promise<{ success:
     brand: blog.brand || null,
     tags: blog.tags,
     content: blog.content,
+    faqs: blog.faqs || [],
     video_url: blog.videoUrl || null,
   };
 
-  const { data, error } = await supabase.from("blogs").insert([payload]).select().single();
+  let { data, error } = await supabase.from("blogs").insert([payload]).select().single();
+
+  if (error && error.message.toLowerCase().includes("faqs")) {
+    const fallbackPayload: any = { ...payload };
+    delete fallbackPayload.faqs;
+    fallbackPayload.content = {
+      ...payload.content,
+      faqs: payload.faqs,
+    };
+
+    const retry = await supabase.from("blogs").insert([fallbackPayload]).select().single();
+    data = retry.data;
+    error = retry.error;
+  }
 
   if (error) {
     return { success: false, error: error.message };
@@ -224,9 +261,25 @@ export async function updateBlog(id: string, blog: Partial<BlogPost>): Promise<{
   if (blog.brand !== undefined) payload.brand = blog.brand;
   if (blog.tags !== undefined) payload.tags = blog.tags;
   if (blog.content !== undefined) payload.content = blog.content;
+  if (blog.faqs !== undefined) payload.faqs = blog.faqs;
   if (blog.videoUrl !== undefined) payload.video_url = blog.videoUrl;
 
-  const { data, error } = await supabase.from("blogs").update(payload).eq("id", id).select().single();
+  let { data, error } = await supabase.from("blogs").update(payload).eq("id", id).select().single();
+
+  if (error && error.message.toLowerCase().includes("faqs")) {
+    const fallbackPayload: any = { ...payload };
+    delete fallbackPayload.faqs;
+    if (blog.faqs !== undefined) {
+      fallbackPayload.content = {
+        ...payload.content,
+        faqs: blog.faqs,
+      };
+    }
+
+    const retry = await supabase.from("blogs").update(fallbackPayload).eq("id", id).select().single();
+    data = retry.data;
+    error = retry.error;
+  }
 
   if (error) {
     return { success: false, error: error.message };

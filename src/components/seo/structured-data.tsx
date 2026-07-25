@@ -3,12 +3,14 @@ import {
   generatePersonSchema,
   generateWebsiteSchema,
   generateServiceSchema,
+  generateFAQSchema,
 } from "@/lib/schema";
 
 export function StructuredData() {
   const personSchema = generatePersonSchema();
   const websiteSchema = generateWebsiteSchema();
   const serviceSchema = generateServiceSchema();
+  const faqSchema = generateFAQSchema();
 
   return (
     <>
@@ -36,6 +38,15 @@ export function StructuredData() {
           __html: JSON.stringify(serviceSchema),
         }}
       />
+      {/* FAQ Schema */}
+      <Script
+        id="faq-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqSchema),
+        }}
+      />
     </>
   );
 }
+

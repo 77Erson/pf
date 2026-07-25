@@ -9,6 +9,9 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import { BlogCard } from "@/components/ui/blog-card";
+import { FAQAccordion } from "@/components/ui/faq-accordion";
+
+import { generateBlogPostingSchema } from "@/lib/schema";
 
 interface BlogPageProps {
   params: Promise<{
@@ -61,10 +64,17 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
     .filter((b) => b.slug !== blog.slug)
     .slice(0, 3);
 
+  const blogSchema = generateBlogPostingSchema(blog);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+      />
       <Navbar />
       <main className="relative overflow-hidden min-h-screen pt-28 pb-16">
+
         <article className="container-custom max-w-4xl mx-auto">
           {/* Back Navigation */}
           <div className="mb-8">
@@ -281,6 +291,15 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
                 </span>
               ))}
             </div>
+          )}
+
+          {/* Article FAQs */}
+          {blog.faqs && blog.faqs.length > 0 && (
+            <FAQAccordion
+              items={blog.faqs}
+              title="Frequently Asked Questions"
+              subtitle="Direct answers to key questions covered in this article."
+            />
           )}
 
           {/* CTA Box */}

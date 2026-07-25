@@ -2,30 +2,19 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { usePathname } from "next/navigation";
 
 export function PageLoader() {
   const [isLoading, setIsLoading] = useState(true);
-  const pathname = usePathname();
 
   useEffect(() => {
-    // Simulate initial page load
+    // Hide loader immediately on mount
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1500);
+    }, 150);
 
     return () => clearTimeout(timer);
   }, []);
 
-  // Reset loader on route change
-  useEffect(() => {
-    setIsLoading(true);
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 800);
-
-    return () => clearTimeout(timer);
-  }, [pathname]);
 
   return (
     <AnimatePresence>

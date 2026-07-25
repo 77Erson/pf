@@ -16,7 +16,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: "project-1",
-    title: "Documentry Edit",
+    title: "Documentary Edit",
     description:
       "High-impact cinematic video with stunning visuals and dynamic transitions.",
     longDescription:

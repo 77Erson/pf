@@ -1,0 +1,66 @@
+# Erson Studio — Full Brand & Technical Context Document
+
+## Overview
+Erson Studio (operated by Diwash Ghimire, known professionally as Erson) is a specialized video editing and brand content strategy consultancy. With a background in mainstream media production and 3+ years of professional freelance experience, Erson specializes in post-production frameworks that maximize viewer retention and compound brand equity.
+
+## Primary Services
+
+### 1. Content Strategy
+- **Audience & Positioning**: Identifying content angles, defining brand voice, and establishing video formats.
+- **Scripting & Structure**: Structuring hooks, body content, pattern interrupts, and calls-to-action to minimize viewer drop-off.
+- **Content Systems**: Developing scalable, repeatable frameworks for monthly video output.
+
+### 2. Video Production & Post-Production
+- **Retention Editing**: Fast-paced motion cuts, dynamic lower thirds, text animations, and visual pattern interrupts every 3 to 5 seconds.
+- **Color Grading**: Node-based color correction, skin tone balancing, and custom LUT application in DaVinci Resolve.
+- **Sound Design**: Multi-layer audio mixing, risers, ambient textures, and sound FX synchronization.
+- **Motion Graphics**: Title animations, logo stingers, and visual overlays in Adobe Premiere Pro & After Effects.
+
+### 3. Content Partnership (Retainers)
+- Dedicated monthly post-production partnership.
+- High-volume content editing for YouTube, Shorts, Reels, TikTok, and B2B commercial campaigns.
+- Direct creative direction to ensure visual and narrative consistency across all releases.
+
+## Verified Results & Case Studies
+
+### CG Communications Case Study
+- **Challenge**: Low viewer retention on long-form content.
+- **Strategy**: Introduced 3-second kinetic text hooks, visual pattern interrupts, and custom color grading.
+- **Result**: Scaled channel impressions from 8,000 to over 10,000,000+ (10M+) monthly views with an 85% average retention rate.
+
+### Kantipur Media Group Partnership
+- Handled post-production edits for mainstream broadcasting and digital video channels.
+
+## Frequently Asked Questions (FAQ)
+
+### Q: What is included in a Content Partnership retainer?
+A: Content Partnership retainers include end-to-end post-production for a fixed monthly volume of videos (e.g. 4-8 long-form videos or 15-30 short-form reels). This includes script polishing, retention editing, motion graphics, custom color grading, sound design, thumbnail strategy, and ongoing content review.
+
+### Q: How long does a retention video edit take?
+A: Turnaround times depend on project length and complexity. Typically, short-form videos (Reels/Shorts) take 24–48 hours, while long-form YouTube or commercial edits take 3–5 business days. Retainer clients receive priority turnaround schedules.
+
+### Q: What is the difference between a project rate and a monthly retainer?
+A: One-off project rates cover a single video edit with pre-defined revision rounds. A monthly retainer provides a dedicated production capacity, lower per-video costs, faster turnaround, and long-term brand strategy integration.
+
+### Q: Which software pipeline does Erson Studio use?
+A: Erson Studio uses a hybrid workflow: Adobe Premiere Pro & After Effects for cutting, compositing, and motion graphics, combined with DaVinci Resolve Studio for high-end color grading and final master exports.
+
+## Strategic Articles & Playbooks
+1. **How to Turn Raw Footage into 10M+ Views: The Retention Editing Playbook**
+   - URL: https://erson.studio/blogs/how-to-turn-raw-footage-into-10m-views
+   - Focus: Dynamic visual hooks, pacing control, pattern interrupts, and brand identity alignment.
+2. **The 3-Second Hook Formula That Quadruples Video Watch Time**
+   - URL: https://erson.studio/blogs/the-3-second-hook-formula-for-brand-videos
+   - Focus: Motion entry, visual contrast, micro audio impacts, and retention analytics.
+3. **DaVinci Resolve vs Adobe Premiere Pro: Choosing the Engine for B2B**
+   - URL: https://erson.studio/blogs/davinci-resolve-vs-premiere-pro-for-b2b
+   - Focus: Color grading pipelines vs motion graphics integration for B2B video assets.
+4. **Why One-Off Edits Kill Brand Identity (And How Strategy Fixes It)**
+   - URL: https://erson.studio/blogs/why-b2b-brands-need-consistent-visual-voice
+   - Focus: Video style guides, lower-third consistency, audio signatures, and brand recall.
+
+## Contact Information
+- **Website**: https://erson.studio
+- **Book Consultation**: https://calendly.com/erson/consultation-meeting
+- **Email**: erson.editz@gmail.com
+- **Fiverr Profile**: https://www.fiverr.com/s/BRk6mpW (4.9/5 stars, 48 reviews)

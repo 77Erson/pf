@@ -34,7 +34,7 @@ export function BlogCard({ blog, index = 0 }: BlogCardProps) {
           className="object-cover group-hover:scale-105 transition-transform duration-500"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
-        
+
         {/* Category Badge */}
         <span className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold bg-accent text-accent-foreground shadow-md">
           {blog.category}
