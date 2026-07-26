@@ -78,7 +78,7 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-sm md:text-base text-muted-foreground/70 italic max-w-xl mx-auto mb-10"
         >
-          &ldquo;Trusted by 50+ clients worldwide • Mainstream media background • Available for retainer partnerships&rdquo;
+          &ldquo;Specializing in founder & podcast content • Trusted by 50+ clients worldwide • Mainstream media background • Available for retainer partnerships&rdquo;
         </motion.p>
 
         {/* CTA Buttons */}
