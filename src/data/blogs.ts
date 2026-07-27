@@ -89,6 +89,84 @@ export const blogsData: BlogPost[] = [
   },
   {
     id: "2",
+    slug: "davinci-resolve-vs-premiere-pro-for-b2b",
+    title: "DaVinci Resolve vs Adobe Premiere Pro: Choosing the Engine for B2B",
+    excerpt:
+      "A deep dive into color grading workflows, motion graphics integration, and render efficiency for high-ticket video editing.",
+    coverImage: "/image/pr vs dr.png",
+    category: "Editing Tools",
+    date: "July 20, 2026",
+    readTime: "5 min read",
+    views: "5.1K views",
+    likes: "410 likes",
+    author: {
+      name: "Erson",
+      role: "Brand Content Strategist",
+      avatar: "/favicon.png",
+    },
+    tags: ["DaVinci Resolve", "Premiere Pro", "Post Production", "Workflow"],
+    content: {
+      introduction:
+        "Direct Answer: The choice between DaVinci Resolve and Adobe Premiere Pro for B2B brands depends on post-production requirements: DaVinci Resolve excels in node-based cinematic color grading, while Adobe Premiere Pro is superior for After Effects motion graphics integration.",
+      sections: [
+        {
+          heading: "Why Is DaVinci Resolve the Industry Standard for Commercial Color Grading?",
+          body: "DaVinci Resolve's node-based color pipeline provides unmatched precision for skin tone correction, HDR color mapping, and consistent LUT application across multi-camera setups.",
+          keyTakeaway:
+            "Utilize DaVinci Resolve when final visual color grade and skin-tone perfection dictate client brand quality.",
+        },
+        {
+          heading: "When Should B2B Video Teams Choose Adobe Premiere Pro?",
+          body: "Adobe Premiere Pro's dynamic link integration with After Effects and Photoshop allows rapid turnarounds for motion-graphic heavy explainer videos and multi-format social exports.",
+          keyTakeaway:
+            "Choose Premiere Pro when your production pipeline relies on complex vector motion templates.",
+        },
+      ],
+      conclusion:
+        "Erson Studio uses a hybrid pipeline: cutting and motion graphics compositing in Premiere Pro, paired with master color passes and final rendering in DaVinci Resolve.",
+    },
+  },
+  {
+    id: "3",
+    slug: "the-3-second-hook-formula-for-brand-videos",
+    title: "The 3-Second Hook Formula That Quadruples Video Watch Time",
+    excerpt:
+      "Why the first 3 seconds determine 80% of your video ROI, and how micro-animations + audio pacing keep high-ticket viewers locked in.",
+    coverImage: "/image/compass-wealth-management.webp",
+    category: "Retention Editing",
+    date: "July 02, 2026",
+    readTime: "4 min read",
+    views: "3.2K views",
+    likes: "210 likes",
+    author: {
+      name: "Erson",
+      role: "Brand Content Strategist",
+      avatar: "/image/compass-wealth-management.webp",
+    },
+    tags: ["Hooks", "Engagement", "Shorts & Reels", "Video Strategy"],
+    content: {
+      introduction:
+        "Direct Answer: The first 3 seconds determine 80% of a video's total ROI. If a viewer stays past second 3, data across 100+ commercial projects shows their probability of watching the full video increases by over 400%.",
+      sections: [
+        {
+          heading: "How Does Visual Contrast and Motion Entry Prevent Scroll-Past Dropoff?",
+          body: "Starting a clip with static talking heads guarantees drop-off. Utilizing fast motion punches, graphic lower thirds, and subtle sound design immediately communicates high production value and sparks visual intrigue.",
+          keyTakeaway:
+            "The opening frame must contain active movement or visual contrast within the first 500 milliseconds.",
+        },
+        {
+          heading: "How Do Micro Audio Impacts Reinforce Visual Video Cuts?",
+          body: "Subtle risers, WHOOSH sound FX, and impact bass drops operate on a subconscious level, signaling importance to the viewer's brain before they consciously process spoken words.",
+          keyTakeaway:
+            "Layer ambient texture and subtle audio impacts directly under your spoken hook.",
+        },
+      ],
+      conclusion:
+        "Mastering the 3-second hook is the single highest-leverage optimization in modern video editing. Fix your hooks, and watch overall channel watch-time quadruple.",
+    },
+  },
+  {
+    id: "4",
     slug: "how-to-turn-raw-footage-into-10m-views",
     title: "How to Turn Raw Footage into 10M+ Views: The Retention Editing Playbook",
     excerpt:
@@ -151,84 +229,8 @@ export const blogsData: BlogPost[] = [
       },
     ],
   },
-  {
-    id: "3",
-    slug: "the-3-second-hook-formula-for-brand-videos",
-    title: "The 3-Second Hook Formula That Quadruples Video Watch Time",
-    excerpt:
-      "Why the first 3 seconds determine 80% of your video ROI, and how micro-animations + audio pacing keep high-ticket viewers locked in.",
-    coverImage: "/image/compass-wealth-management.webp",
-    category: "Retention Editing",
-    date: "July 02, 2026",
-    readTime: "4 min read",
-    views: "3.2K views",
-    likes: "210 likes",
-    author: {
-      name: "Erson",
-      role: "Brand Content Strategist",
-      avatar: "/image/compass-wealth-management.webp",
-    },
-    tags: ["Hooks", "Engagement", "Shorts & Reels", "Video Strategy"],
-    content: {
-      introduction:
-        "Direct Answer: The first 3 seconds determine 80% of a video's total ROI. If a viewer stays past second 3, data across 100+ commercial projects shows their probability of watching the full video increases by over 400%.",
-      sections: [
-        {
-          heading: "How Does Visual Contrast and Motion Entry Prevent Scroll-Past Dropoff?",
-          body: "Starting a clip with static talking heads guarantees drop-off. Utilizing fast motion punches, graphic lower thirds, and subtle sound design immediately communicates high production value and sparks visual intrigue.",
-          keyTakeaway:
-            "The opening frame must contain active movement or visual contrast within the first 500 milliseconds.",
-        },
-        {
-          heading: "How Do Micro Audio Impacts Reinforce Visual Video Cuts?",
-          body: "Subtle risers, WHOOSH sound FX, and impact bass drops operate on a subconscious level, signaling importance to the viewer's brain before they consciously process spoken words.",
-          keyTakeaway:
-            "Layer ambient texture and subtle audio impacts directly under your spoken hook.",
-        },
-      ],
-      conclusion:
-        "Mastering the 3-second hook is the single highest-leverage optimization in modern video editing. Fix your hooks, and watch overall channel watch-time quadruple.",
-    },
-  },
-  {
-    id: "4",
-    slug: "davinci-resolve-vs-premiere-pro-for-b2b",
-    title: "DaVinci Resolve vs Adobe Premiere Pro: Choosing the Engine for B2B",
-    excerpt:
-      "A deep dive into color grading workflows, motion graphics integration, and render efficiency for high-ticket video editing.",
-    coverImage: "/image/huskey-turf-solutions.webp",
-    category: "Editing Tools",
-    date: "June 20, 2026",
-    readTime: "5 min read",
-    views: "5.1K views",
-    likes: "410 likes",
-    author: {
-      name: "Erson",
-      role: "Brand Content Strategist",
-      avatar: "/image/huskey-turf-solutions.webp",
-    },
-    tags: ["DaVinci Resolve", "Premiere Pro", "Post Production", "Workflow"],
-    content: {
-      introduction:
-        "Direct Answer: The choice between DaVinci Resolve and Adobe Premiere Pro for B2B brands depends on post-production requirements: DaVinci Resolve excels in node-based cinematic color grading, while Adobe Premiere Pro is superior for After Effects motion graphics integration.",
-      sections: [
-        {
-          heading: "Why Is DaVinci Resolve the Industry Standard for Commercial Color Grading?",
-          body: "DaVinci Resolve's node-based color pipeline provides unmatched precision for skin tone correction, HDR color mapping, and consistent LUT application across multi-camera setups.",
-          keyTakeaway:
-            "Utilize DaVinci Resolve when final visual color grade and skin-tone perfection dictate client brand quality.",
-        },
-        {
-          heading: "When Should B2B Video Teams Choose Adobe Premiere Pro?",
-          body: "Adobe Premiere Pro's dynamic link integration with After Effects and Photoshop allows rapid turnarounds for motion-graphic heavy explainer videos and multi-format social exports.",
-          keyTakeaway:
-            "Choose Premiere Pro when your production pipeline relies on complex vector motion templates.",
-        },
-      ],
-      conclusion:
-        "Erson Studio uses a hybrid pipeline: cutting and motion graphics compositing in Premiere Pro, paired with master color passes and final rendering in DaVinci Resolve.",
-    },
-  },
+
+  
   {
     id: "5",
     slug: "why-b2b-brands-need-consistent-visual-voice",
