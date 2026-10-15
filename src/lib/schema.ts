@@ -89,7 +89,7 @@ export function generatePersonSchema(): PersonSchema {
       "https://www.instagram.com/erson.editz/",
       "https://www.youtube.com/@ersoneditz",
       "https://www.linkedin.com/in/ersoneditz/",
-      "https://www.fiverr.com/s/BRk6mpW",
+       "https://www.fiverr.com/erson77",
     ],
     knowsAbout: [
       "Video Editing",

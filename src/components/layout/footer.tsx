@@ -29,7 +29,7 @@ const socialLinks: SocialLink[] = [
   },
   {
     name: "Fiverr",
-    url: "https://www.fiverr.com/s/BRk6mpW",
+    url: "https://www.fiverr.com/erson77",
     icon: "/icons/fiverr.svg",
   },
 ];

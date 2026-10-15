@@ -148,7 +148,7 @@ export function About() {
                   </div>
                 </div>
                 <a
-                  href="https://www.fiverr.com/s/BRk6mpW"
+                  href="https://www.fiverr.com/erson77"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hidden sm:inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg bg-secondary hover:bg-accent/10 hover:text-accent border border-border transition-colors"
